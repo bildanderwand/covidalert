@@ -110,8 +110,12 @@ ktObj = dat.then(function(d) {
   let minDateall = d3.min(d, d => d.Datum);
   let maxDateall = d3.max(d, d => d.Datum);
 
+	// arrange by Date
+	d  = d.sort(function(a,b) { return d3.ascending(a.numbdate, b.numdate) } );
+
   dataend = kt.map(g => {
     let subdat = d.filter(r => r['kt'] === g);
+
 
     let allDates = getDates(minDateall, maxDateall);
     // max Date per Kanton to set to null if NA
