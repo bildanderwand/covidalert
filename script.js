@@ -309,5 +309,4 @@ Alarmstufe: ${f.alarmlevel}
 
   Plotly.newPlot('myDiv', data, layout = layout, config);
 
-  return dataend;
 });
