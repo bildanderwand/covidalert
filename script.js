@@ -156,16 +156,16 @@ ktObj = dat.then(function(d) {
      }
 
      // alarmlevel
-     if (allDates[i]['inc7d'] < 10) {
+     if (allDates[i]['inc7d'] <= 10) {
        allDates[i]['alarmlevel'] = 'Grün';
        allDates[i]['alarmcolor'] = 'green';
        allDates[i]['alarmnumb'] = 0;
-     } else if (allDates[i]['inc7d'] < 25) {
-       if(allDates[i]['inc7dChange'] >= 0.2) { // bigger or equal or bigger is not clear in text, I always make bigger or equal
+     } else if (allDates[i]['inc7d'] <= 25) {
+       if(allDates[i]['inc7dChange'] > 0.2) { // bigger or equal or bigger is not clear in text, I always make bigger
          allDates[i]['alarmlevel'] = 'Orange';
          allDates[i]['alarmcolor'] = 'orange';
          allDates[i]['alarmnumb'] = 0.5;
-       } else if (allDates[i]['inc7dChange'] >= 0.10) {
+       } else if (allDates[i]['inc7dChange'] > 0.10) {
          allDates[i]['alarmlevel'] = 'Gelb';
          allDates[i]['alarmcolor'] = 'yellow';
          allDates[i]['alarmnumb'] = 0.25;
@@ -174,16 +174,16 @@ ktObj = dat.then(function(d) {
          allDates[i]['alarmcolor'] = 'green';
          allDates[i]['alarmnumb'] = 0;
        }
-     } else if (allDates[i]['inc7d'] < 50) {
-       if(allDates[i]['inc7dChange'] >= 0.2) { // bigger or equal or bigger is not clear in text, I always make bigger or equal
+     } else if (allDates[i]['inc7d'] <= 50) {
+       if(allDates[i]['inc7dChange'] > 0.2) {
          allDates[i]['alarmlevel'] = 'Rot';
          allDates[i]['alarmcolor'] = 'pink';
          allDates[i]['alarmnumb'] = 0.75;
-       } else if (allDates[i]['inc7dChange'] >= 0.10) {
+       } else if (allDates[i]['inc7dChange'] > 0.10) {
          allDates[i]['alarmlevel'] = 'Orange';
          allDates[i]['alarmcolor'] = 'orange';
          allDates[i]['alarmnumb'] = 0.5;
-       } else if (allDates[i]['inc7dChange'] >= 0) {
+       } else if (allDates[i]['inc7dChange'] > 0) {
          allDates[i]['alarmlevel'] = 'Gelb';
          allDates[i]['alarmcolor'] = 'yellow';
          allDates[i]['alarmnumb'] = 0.25;
@@ -192,16 +192,12 @@ ktObj = dat.then(function(d) {
          allDates[i]['alarmcolor'] = 'green';
          allDates[i]['alarmnumb'] = 0;
        }
-     } else if (allDates[i]['inc7d'] < 75) {
-       if(allDates[i]['inc7dChange'] >= 0.2) { // bigger or equal or bigger is not clear in text, I always make bigger or equal
+     } else if (allDates[i]['inc7d'] <= 75) {
+       if (allDates[i]['inc7dChange'] > 0.10) {
          allDates[i]['alarmlevel'] = 'Rot';
          allDates[i]['alarmcolor'] = 'pink';
          allDates[i]['alarmnumb'] = 0.75;
-       } else if (allDates[i]['inc7dChange'] >= 0.10) {
-         allDates[i]['alarmlevel'] = 'Rot';
-         allDates[i]['alarmcolor'] = 'pink';
-         allDates[i]['alarmnumb'] = 0.75;
-       } else if (allDates[i]['inc7dChange'] >= 0) {
+       } else if (allDates[i]['inc7dChange'] > 0) {
          allDates[i]['alarmlevel'] = 'Orange';
          allDates[i]['alarmcolor'] = 'orange';
          allDates[i]['alarmnumb'] = 0.5;
@@ -211,15 +207,11 @@ ktObj = dat.then(function(d) {
          allDates[i]['alarmnumb'] = 0.25;
        }
      } else {
-       if(allDates[i]['inc7dChange'] >= 0.2) { // bigger or equal or bigger is not clear in text, I always make bigger or equal
+       if(allDates[i]['inc7dChange'] > 0.2) {
          allDates[i]['alarmlevel'] = 'Rot';
          allDates[i]['alarmcolor'] = 'red';
          allDates[i]['alarmnumb'] = 1;
-       } else if (allDates[i]['inc7dChange'] >= 0.10) {
-         allDates[i]['alarmlevel'] = 'Rot';
-         allDates[i]['alarmcolor'] = 'pink';
-         allDates[i]['alarmnumb'] = 0.75;
-       } else if (allDates[i]['inc7dChange'] >= 0) {
+       } else if (allDates[i]['inc7dChange'] > 0) {
          allDates[i]['alarmlevel'] = 'Rot';
          allDates[i]['alarmcolor'] = 'pink';
          allDates[i]['alarmnumb'] = 0.75;
@@ -247,6 +239,7 @@ ktObj = dat.then(function(d) {
   });
 
 
+	// arrays for plot
   // alarmnumbs
   let zarr = dataend.map(g =>
       g.map(f => f.alarmnumb)
@@ -272,6 +265,7 @@ Alarmstufe: ${f.alarmlevel}
         })
     );
 
+	// the plot
   let colorscaleValue = [
     [0, 'green'],
     [0.25, 'yellow'],
@@ -289,7 +283,7 @@ Alarmstufe: ${f.alarmlevel}
       colorscale: colorscaleValue,
       text: text,
       hoverinfo: 'text',
-      hoverongaps: true,
+      hoverongaps: false,
       showscale: false
     }
   ];
