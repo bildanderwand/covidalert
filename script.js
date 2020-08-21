@@ -296,8 +296,8 @@ Alarmstufe: ${f.alarmlevel}
     margin: {
       t: 10,
       r: 10,
-      b: 50,
-      l: 50
+      b: 40,
+      l: 30
     },
     yaxis: {
     	showgrid: false
